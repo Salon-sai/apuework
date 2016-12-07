@@ -39,4 +39,4 @@ $ size /usr/bin/cc
 > * 堆(heap) 通常在堆中进行**动态存储分配**
 
     栈与堆的组成类型于双向栈的数据结构。如图：
-![典型的存储器空间安排][http://s10.sinaimg.cn/orignal/494e45feg8ec9c0576139&690]
+![典型的存储器空间安排](http://s10.sinaimg.cn/orignal/494e45feg8ec9c0576139&690)
