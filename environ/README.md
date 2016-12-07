@@ -20,9 +20,9 @@ int setjmp(jmp_buf env);
 void longjmp(jmp_buf env, int val);
 ```
     
-    setjmp与longjmp是同时使用的一组函数。在main函数中，我们直接调用该函数，所以返回值为0。setjmp函数存入的env为全局变量，保存当前的环境信息。longjmp的参数中env为setjmp存入的env用来恢复状态的所有信息，val为setjmp返回的值
+setjmp与longjmp是同时使用的一组函数。在main函数中，我们直接调用该函数，所以返回值为0。setjmp函数存入的env为全局变量，保存当前的环境信息。longjmp的参数中env为setjmp存入的env用来恢复状态的所有信息，val为setjmp返回的值
 
-    在testjmp.c的程序中，我们不使用-O进行优化处理，会发现当中的变量没有变回原来的值，它仍然维持在调用setjmp之后的值。因为它仍然存在于存储器当中，而优化后变量都会存在于寄存器当中。**（存放在存储器中的变量将具有longjmp时的值，而在CPU和浮点寄存器中的变量则恢复为调用setjmp的值）**
+在testjmp.c的程序中，我们不使用-O进行优化处理，会发现当中的变量没有变回原来的值，它仍然维持在调用setjmp之后的值。因为它仍然存在于存储器当中，而优化后变量都会存在于寄存器当中。**（存放在存储器中的变量将具有longjmp时的值，而在CPU和浮点寄存器中的变量则恢复为调用setjmp的值）**
 
 ### 4.C语言的存储布局
 
@@ -39,4 +39,4 @@ $ size /usr/bin/cc
 > * 堆(heap) 通常在堆中进行**动态存储分配**
 
     栈与堆的组成类型于双向栈的数据结构。如图：
-![典型的存储器空间安排][1]
+![典型的存储器空间安排][http://s10.sinaimg.cn/orignal/494e45feg8ec9c0576139&690]
