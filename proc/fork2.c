@@ -1,0 +1,39 @@
+#include "apue.h"
+#include <sys/wait.h>
+
+int
+main(int argc, char const *argv[])
+{
+	pid_t pid;
+
+	if ((pid = fork()) < 0)
+	{
+		err_sys("fork error");
+	}
+	else if (pid == 0)
+	{
+		if ((pid = fork()) < 0)
+		{
+			err_sys("fork error");
+		}
+		else if (pid > 0)
+		{
+			exit(0);	// the first process exit
+		}
+
+		sleep(2);		// the second process sleep 2 second
+		// the second child parent id is not the init (pid = 1)
+		// its parent is other (pid = 2715)
+		printf("second child pid : %ld\n", (long)getpid());
+		printf("second child , parent pid = %ld\n", (long)getppid());
+		exit(0);
+	}
+
+	if (waitpid(pid, NULL, 0) != pid)
+	{
+		printf("current pid : % ld\n", (long)getpid());
+		err_sys("waitpid error");
+	}
+
+	exit(0);
+}

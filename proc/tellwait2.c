@@ -1,0 +1,46 @@
+#include "apue.h"
+
+static void charatatime(char *);
+
+int
+main(int argc, char const *argv[])
+{
+	
+	pid_t pid;
+	char *str;
+
+	TELL_WAIT();
+
+	if ((pid = fork()) < 0)
+	{
+		err_sys("fork error");
+	}
+	else if (pid == 0) // child
+	{
+		WAIT_PARENT();
+		str = "output from child\n";
+	}
+	else
+	{
+		str = "output from parent\n";
+		TELL_CHILD(pid);
+	}
+
+	charatatime(str);
+	return 0;
+}
+
+static void
+charatatime(char *str)
+{
+	char *ptr;
+	int c;
+
+	setbuf(stdout, NULL);
+
+	for (ptr = str; (c = *ptr++) != 0;)
+	{
+		putc(c, stdout);
+	}
+
+}
